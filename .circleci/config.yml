@@ -1,0 +1,25 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:17.2.0-buster
+    working_directory: ~/build
+    steps:
+      - checkout
+      - run:
+          name: trigger repository dispatch
+          command: |-
+            curl -i \
+              -X POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer $PERSONAL_ACCESS_TOKEN" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              https://api.github.com/repos/n-aoki0409/test_gitaction/dispatches \
+              -d '{"event_type":"execute_go","client_payload":{"message":"Hello from github actions by circle ci!!"}}'
+
+workflows:
+  build:
+    jobs:
+      - build:
+          context: GitHub

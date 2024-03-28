@@ -2,6 +2,8 @@ name: Repository Dispatch Workflow
 on:
   repository_dispatch:
     types: execute_go
+  workflow_dispatch:
+
 jobs:
   execute_go:
     runs-on: ubuntu-latest
@@ -16,6 +18,10 @@ jobs:
           cache: true
 
       - name: Execute Go
+        if: github.event_name != 'repository_dispatch'
+        run: echo execute_go from workflow_dispatch
+
+        if: github.event_name == 'repository_dispatch'
         env:
           MESSAGE: ${{ github.event.client_payload.message }}
         run: go run .
