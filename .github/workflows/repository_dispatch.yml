@@ -3,7 +3,8 @@ on:
   repository_dispatch:
     types: execute_go
   workflow_dispatch:
-
+env:
+  env_1: hashito
 jobs:
   execute_go:
     runs-on: ubuntu-latest
@@ -21,9 +22,11 @@ jobs:
         if: ${{ github.event_name == 'repository_dispatch' && github.event.action == 'execute_go' }}
         env:
           MESSAGE: ${{ github.event.client_payload.message }}
-        run: go run .
+        run: |
+          env_1=${{ github.event.client_payload.message }}
+          go run .
 
       - name: Execute Go from workflow_dispatch
         run: |
-          echo ${{ github.event.client_payload.message }}
+          echo $env_1
           echo execute_go from workflow_dispatch
