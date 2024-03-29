@@ -3,11 +3,15 @@ on:
   repository_dispatch:
     types: execute_go
   workflow_dispatch:
+    inputs:
+      message:
+        required: true
+        type: string
 
 jobs:
   execute_go:
     env:
-      HELLO: Hello
+      HELLO: ${{ inputs.message }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
