@@ -22,7 +22,7 @@ jobs:
         run: echo execute_go from workflow_dispatch
 
       - name: Execute Go from repository_dispatch
-        if: github.event_name == 'repository_dispatch'
+        if: ${{ (github.event_name == 'repository_dispatch') && (github.event.action == 'execute_go') }}
         env:
           MESSAGE: ${{ github.event.client_payload.message }}
         run: go run .
