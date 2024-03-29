@@ -5,9 +5,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  env:
-    HELLO: Hello
   execute_go:
+    env:
+      HELLO: Hello
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
