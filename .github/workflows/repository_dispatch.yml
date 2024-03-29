@@ -24,7 +24,7 @@ jobs:
         env:
           MESSAGE: ${{ github.event.client_payload.message }}
         run: |
-          echo ${{ github.event.client_payload.message }} >> $HELLO
+          echo "HELLO=${{ github.event.client_payload.message }}" >> $GITHUB_ENV
           go run .
 
       - name: Execute Go from workflow_dispatch
