@@ -62,4 +62,10 @@ jobs:
 
       - name: Push to GitHub
         run: |
+          git add go.mod
+          git commit -m "update go.mod apidoc/${{ env.STAGE }}" go.mod
+          if [ $? -ne 0]; then
+            echo "no changes"
+            exit 0
+          fi
           git push origin apidoc/${{ env.STAGE }}
