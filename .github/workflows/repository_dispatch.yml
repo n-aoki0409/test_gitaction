@@ -55,9 +55,11 @@ jobs:
           go run .
 
       - name: Execute Go from workflow_dispatch
-        #if: github.event_name == 'workflow_dispatch'
         run: |
           echo ${{ env.HELLO }}
           echo ${{ env.PATHVER }}
           echo execute_go from workflow_dispatch
+
+      - name: Push to GitHub
+        run: |
           git push origin apidoc/${{ env.STAGE }}
