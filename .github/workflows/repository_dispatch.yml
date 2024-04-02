@@ -9,7 +9,11 @@ on:
         type: string
       stage:
         required: true
-        type: string
+        type: choice
+        options:
+          - dev
+          - qa1
+          - prd
       pathver:
         required: false
         type: string
