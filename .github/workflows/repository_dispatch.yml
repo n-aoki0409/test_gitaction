@@ -33,7 +33,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ STAGE }}
+          ref: ${{ env.STAGE }}
 
       - name: Set up Go
         uses: actions/setup-go@v5
