@@ -34,7 +34,7 @@ jobs:
           MESSAGE: ${{ github.event.client_payload.message }}
         run: |
           echo "HELLO=${{ github.event.client_payload.message }}" >> $GITHUB_ENV
-          echo $PATHVER
+          echo ${{ github.event.inputs.pathver.default }}
           go run .
 
       - name: Execute Go from workflow_dispatch
