@@ -19,6 +19,12 @@ jobs:
       PATHVER: ${{ inputs.pathver }}
     runs-on: ubuntu-latest
     steps:
+      - name: Override Env Values
+        if: ${{ github.event_name == 'repository_dispatch' && github.event.action == 'execute_go' }}
+        run: |
+          echo "HELLO=${{ github.event.client_payload.message }}" >> $GITHUB_ENV
+          echo "PATHVER=v1" >> $GITHUB_ENV
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -33,8 +39,8 @@ jobs:
         env:
           MESSAGE: ${{ github.event.client_payload.message }}
         run: |
-          echo "HELLO=${{ github.event.client_payload.message }}" >> $GITHUB_ENV
-          echo ${{ github.event.inputs.pathver.default }}
+          echo $HELLO
+          echo $PATHVER
           go run .
 
       - name: Execute Go from workflow_dispatch
