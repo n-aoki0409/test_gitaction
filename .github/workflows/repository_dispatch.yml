@@ -61,6 +61,7 @@ jobs:
           echo execute_go from workflow_dispatch
 
       - name: Push to GitHub
+        continue-on-error: true
         run: |
           git config --global user.email "smijohn694fasfaf@gmail.com"
           git config --global user.name "n-aoki0409"
