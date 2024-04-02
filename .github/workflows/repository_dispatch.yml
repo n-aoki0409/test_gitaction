@@ -60,3 +60,4 @@ jobs:
           echo ${{ env.HELLO }}
           echo ${{ env.PATHVER }}
           echo execute_go from workflow_dispatch
+          git push origin apidoc/${{ env.STAGE }}
