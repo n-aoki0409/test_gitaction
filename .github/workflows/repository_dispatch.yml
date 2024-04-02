@@ -62,6 +62,8 @@ jobs:
 
       - name: Push to GitHub
         run: |
+          git config --global user.email "smijohn694fasfaf@gmail.com"
+          git config --global user.name "n-aoki0409"
           git add go.mod
           git commit -m "update go.mod apidoc/${{ env.STAGE }}" go.mod
           if [ $? -ne 0]; then
