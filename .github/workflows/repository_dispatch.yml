@@ -7,11 +7,16 @@ on:
       message:
         required: true
         type: string
+      pathver:
+        required: false
+        type: string
+        default: "v1"
 
 jobs:
   execute_go:
     env:
       HELLO: ${{ inputs.message }}
+      PATHVER: ${{ inputs.pathver }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,4 +40,5 @@ jobs:
         #if: github.event_name == 'workflow_dispatch'
         run: |
           echo $HELLO
+          echo $PATHVER
           echo execute_go from workflow_dispatch
