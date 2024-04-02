@@ -52,7 +52,7 @@ jobs:
         run: |
           echo ${{ env.HELLO }}
           echo ${{ env.PATHVER }}
-          go run . "${{ env.STAGE }}"
+          go run . -stage "${{ env.STAGE }}"
 
       - name: Execute Go from workflow_dispatch
         run: |
