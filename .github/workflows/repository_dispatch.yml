@@ -7,6 +7,9 @@ on:
       message:
         required: true
         type: string
+      stage:
+        required: true
+        type: string
       pathver:
         required: false
         type: string
@@ -16,6 +19,7 @@ jobs:
   execute_go:
     env:
       HELLO: ${{ inputs.message }}
+      STAGE: ${{ inputs.stage }}
       PATHVER: ${{ inputs.pathver }}
     runs-on: ubuntu-latest
     steps:
@@ -23,10 +27,13 @@ jobs:
         if: ${{ github.event_name == 'repository_dispatch' && github.event.action == 'execute_go' }}
         run: |
           echo "HELLO=${{ github.event.client_payload.message }}" >> $GITHUB_ENV
+          echo "STAGE=master" >> $GITHUB_ENV
           echo "PATHVER=v1" >> $GITHUB_ENV
 
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: $STAGE
 
       - name: Set up Go
         uses: actions/setup-go@v5
