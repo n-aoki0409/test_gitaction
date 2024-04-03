@@ -21,14 +21,13 @@ jobs:
       #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #   run: gh workflow run test.yml
 
-      # - name: Execute repository_dispatch_by_gh
-      #   env:
-      #     GH_TOKEN: ${{ steps.generate_token.outputs.token }}
-      #   uses: peter-evans/repository-dispatch@v2
-      #   with:
-      #     repository: n-aoki0409/test_gitaction
-      #     event-type: execute_go
-      #     client-payload: '{"message": "Hello from github actions!!"}'
+      - name: Execute repository_dispatch_by_gh
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          repository: n-aoki0409/test_gitaction
+          event-type: execute_go
+          client-payload: '{"message": "Hello from github actions by gh!!"}'
 
       - name: Execute repository_dispatch_by_curl
         env:
