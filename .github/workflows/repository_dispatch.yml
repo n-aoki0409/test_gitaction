@@ -22,7 +22,7 @@ on:
 jobs:
   execute_go:
     env:
-      HELLO: ${{ inputs.message }}
+      MESSAGE: ${{ inputs.message }}
       STAGE: ${{ inputs.stage }}
       PATHVER: ${{ inputs.pathver }}
     runs-on: ubuntu-latest
@@ -30,7 +30,7 @@ jobs:
       - name: Override Env Values
         if: ${{ github.event_name == 'repository_dispatch' && github.event.action == 'execute_go' }}
         run: |
-          echo "HELLO=${{ github.event.client_payload.message }}" >> $GITHUB_ENV
+          echo "MESSAGE=${{ github.event.client_payload.message }}" >> $GITHUB_ENV
           echo "STAGE=dev" >> $GITHUB_ENV
           echo "PATHVER=v1" >> $GITHUB_ENV
 
@@ -51,13 +51,15 @@ jobs:
         env:
           MESSAGE: ${{ github.event.client_payload.message }}
         run: |
-          echo ${{ env.HELLO }}
+          echo ${{ env.MESSAGE }}
+          echo ${{ env.STAGE }}
           echo ${{ env.PATHVER }}
           go run . -stage "${{ env.STAGE }}"
 
       - name: Execute Go from workflow_dispatch
         run: |
-          echo ${{ env.HELLO }}
+          echo ${{ env.MESSAGEF }}
+          echo ${{ env.STAGE }}
           echo ${{ env.PATHVER }}
           echo execute_go from workflow_dispatch
 
