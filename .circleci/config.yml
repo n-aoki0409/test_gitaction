@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  gh: circleci/github-cli@2.2.0
+  gh: circleci/github-cli@2.3.0
 
 jobs:
   build:
@@ -12,7 +12,6 @@ jobs:
     working_directory: ~/build
     steps:
       - gh/setup:
-        version: 2.23.0
       - checkout
       - run:
           # name: trigger repository dispatch
@@ -32,4 +31,4 @@ workflows:
   build:
     jobs:
       - build:
-          # context: GitHub
+          context: GitHub
