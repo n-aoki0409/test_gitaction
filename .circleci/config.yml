@@ -26,7 +26,7 @@ jobs:
           #     -d '{"event_type":"execute_go","client_payload":{"message":"Hello from github actions by circle ci!!"}}'
           name: trigger workflow dispatch
           command: |-
-            gh workflow run -f message='message from circleci' -f stage=dev -f pathver=v1 repository_dispatch.yml --repo n-aoki0409/test_gitaction
+            gh workflow run -f message='message from circleci' -f stage=dev -f pathver=v1 repository_dispatch.yml --repo n-aoki0409/test_gitaction123
 
 workflows:
   build:
