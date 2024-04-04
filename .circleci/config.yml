@@ -11,6 +11,8 @@ jobs:
     steps:
       - gh/setup:
         version: 2.23.0
+        environment:
+          GITHUB_TOKEN: $PERSONAL_ACCESS_TOKEN
       - checkout
       - run:
           # name: trigger repository dispatch
@@ -25,8 +27,6 @@ jobs:
           name: trigger workflow dispatch
           command: |-
             gh workflow run -f git-ref=master test.yml --repo n-aoki0409/test_gitaction
-          environment:
-            GITHUB_TOKEN: $PERSONAL_ACCESS_TOKEN
 
 workflows:
   build:
