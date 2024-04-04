@@ -9,10 +9,7 @@ jobs:
       - image: circleci/node:17.2.0-buster
     working_directory: ~/build
     steps:
-      - gh/setup:
-        version: 2.23.0
-        environment:
-          GITHUB_TOKEN: $PERSONAL_ACCESS_TOKEN
+      - gh/install
       - checkout
       - run:
           # name: trigger repository dispatch
