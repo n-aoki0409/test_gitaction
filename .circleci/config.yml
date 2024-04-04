@@ -5,11 +5,14 @@ orbs:
 
 jobs:
   build:
+    environment:
+      GITHUB_TOKEN: $PERSONAL_ACCESS_TOKEN
     docker:
       - image: circleci/node:17.2.0-buster
     working_directory: ~/build
     steps:
-      - gh/install
+      - gh/setup:
+        version: 2.23.0
       - checkout
       - run:
           # name: trigger repository dispatch
